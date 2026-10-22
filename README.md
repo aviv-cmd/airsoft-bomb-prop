@@ -10,13 +10,15 @@
 
 # 
 
-# 1\. The bomb is armed and the countdown starts.
+# 1\. The LED is blue while the bomb waits. Press the button to arm it.
 
-# 2\. The light blinks, and the blinking speeds up as time runs out.
+# 2\. The countdown starts. The light blinks, and the blinking speeds up as time runs out.
 
 # 3\. Hold the button for 10 seconds to defuse. If you let go, the 10 seconds start over.
 
 # 4\. If the timer reaches zero, the bomb "explodes" (solid red light).
+
+# 5\. After 3 seconds the bomb resets and waits to be armed again.
 
 # 
 
@@ -48,7 +50,9 @@
 
 # | countdown.py | LED blinks faster and faster, then explodes |
 
-# | defuse.py | Full game loop: countdown plus hold-to-defuse |
+# | defuse.py | Countdown plus hold-to-defuse |
+
+# | game.py | Complete game: press to arm, countdown, defuse or explode, then reset |
 
 # 
 
@@ -60,7 +64,7 @@
 
 # 
 
-# &#x20;   py -3.13 -m mpremote connect COM14 run defuse.py
+# &#x20;   py -3.13 -m mpremote connect COM14 run game.py
 
 # 
 
@@ -82,13 +86,15 @@
 
 # \- \[x] Hold-to-defuse game loop
 
+# \- \[x] Reset after win or lose
+
 # \- \[ ] Buzzer beeps
 
 # \- \[ ] Wiring picture and photos
 
 # \- \[ ] Keypad or display
 
-# \- \[ ] Siren, reset, enclosure
+# \- \[ ] Siren and enclosure
 
 # \- \[ ] Wire-cutting defuse (version 2)
 
