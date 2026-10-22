@@ -12,11 +12,11 @@
 
 # 1\. The LED is blue while the bomb waits. Press the button to arm it.
 
-# 2\. The countdown starts. The light blinks, and the blinking speeds up as time runs out.
+# 2\. The countdown starts. The light blinks and the buzzer beeps, and both speed up as time runs out.
 
-# 3\. Hold the button for 10 seconds to defuse. If you let go, the 10 seconds start over.
+# 3\. Hold the button for 10 seconds to defuse. The LED turns green and the buzzer beeps steadily. If you let go, the 10 seconds start over.
 
-# 4\. If the timer reaches zero, the bomb "explodes" (solid red light).
+# 4\. If the timer reaches zero, the bomb "explodes": solid red light and a long tone.
 
 # 5\. After 3 seconds the bomb resets and waits to be armed again.
 
@@ -32,7 +32,11 @@
 
 # \- On-board BOOT button (GPIO 9)
 
-# \- Buzzer and external button: planned
+# \- Active buzzer (GPIO 2, minus to GND), salvaged from a headset
+
+# \- External button (GPIO 3): planned
+
+# \- 4x3 keypad: planned
 
 # 
 
@@ -48,11 +52,13 @@
 
 # | button\_led.py | LED turns green while the button is held |
 
+# | beep.py | Buzzer test: 5 short beeps |
+
 # | countdown.py | LED blinks faster and faster, then explodes |
 
 # | defuse.py | Countdown plus hold-to-defuse |
 
-# | game.py | Complete game: press to arm, countdown, defuse or explode, then reset |
+# | game.py | Complete game with lights and sounds: press to arm, countdown, defuse or explode, then reset |
 
 # 
 
@@ -88,11 +94,13 @@
 
 # \- \[x] Reset after win or lose
 
-# \- \[ ] Buzzer beeps
+# \- \[x] Buzzer beeps
 
-# \- \[ ] Wiring picture and photos
+# \- \[ ] External button
 
 # \- \[ ] Keypad or display
+
+# \- \[ ] Wiring picture and photos
 
 # \- \[ ] Siren and enclosure
 
