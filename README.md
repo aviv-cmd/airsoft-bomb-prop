@@ -32,7 +32,7 @@
 
 # \- On-board BOOT button (GPIO 9)
 
-# \- Active buzzer (GPIO 2, minus to GND), salvaged from a headset
+# \- Active buzzer (GPIO 2, minus to GND)
 
 # \- External button (GPIO 3): planned
 
