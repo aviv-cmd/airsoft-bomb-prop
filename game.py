@@ -4,6 +4,8 @@ import time
 
 led = neopixel.NeoPixel(machine.Pin(8), 1)
 button = machine.Pin(9, machine.Pin.IN, machine.Pin.PULL_UP)
+buzzer = machine.Pin(2, machine.Pin.OUT)
+buzzer.value(0)
 
 TOTAL_SECONDS = 40
 DEFUSE_SECONDS = 10
@@ -24,6 +26,7 @@ def wait_for_press():
 def play():
     start = time.ticks_ms()
     next_flash = 0
+    next_hold_beep = 0
     hold_start = None
     while True:
         now = time.ticks_ms()
@@ -35,6 +38,11 @@ def play():
                 hold_start = now
             held = time.ticks_diff(now, hold_start) / 1000
             show((0, 20, 0))
+            if time.ticks_diff(now, next_hold_beep) >= 0:
+                buzzer.value(1)
+                time.sleep(0.05)
+                buzzer.value(0)
+                next_hold_beep = time.ticks_add(now, 500)
             if held >= DEFUSE_SECONDS:
                 return "DEFUSED"
         else:
@@ -42,8 +50,10 @@ def play():
             remaining = TOTAL_SECONDS - elapsed
             if time.ticks_diff(now, next_flash) >= 0:
                 show((20, 0, 0))
+                buzzer.value(1)
                 time.sleep(0.05)
                 show((0, 0, 0))
+                buzzer.value(0)
                 wait_ms = int((0.1 + remaining / TOTAL_SECONDS * 0.9) * 1000)
                 next_flash = time.ticks_add(now, wait_ms)
         time.sleep(0.01)
@@ -55,6 +65,13 @@ while True:
     print(result)
     if result == "DEFUSED":
         show((0, 20, 0))
+        buzzer.value(1)
+        time.sleep(0.2)
+        buzzer.value(0)
+        time.sleep(2.8)
     else:
         show((20, 0, 0))
-    time.sleep(3)
+        buzzer.value(1)
+        time.sleep(2)
+        buzzer.value(0)
+        time.sleep(1)
