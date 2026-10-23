@@ -3,7 +3,8 @@ import neopixel
 import time
 
 led = neopixel.NeoPixel(machine.Pin(8), 1)
-button = machine.Pin(9, machine.Pin.IN, machine.Pin.PULL_UP)
+button = machine.Pin(9, machine.Pin.IN, machine.Pin.PULL_UP)      # BOOT button
+ext_button = machine.Pin(3, machine.Pin.IN, machine.Pin.PULL_UP)  # wires: pin 3 to GND
 buzzer = machine.Pin(2, machine.Pin.OUT)
 buzzer.value(0)
 
@@ -14,13 +15,17 @@ def show(color):
     led[0] = color
     led.write()
 
+def pressed():
+    # True if BOOT is pressed or the wires on pin 3 touch GND
+    return button.value() == 0 or ext_button.value() == 0
+
 def wait_for_press():
-    while button.value() == 0:
+    while pressed():
         time.sleep(0.02)
     show((0, 0, 20))
-    while button.value() == 1:
+    while not pressed():
         time.sleep(0.02)
-    while button.value() == 0:
+    while pressed():
         time.sleep(0.02)
 
 def play():
@@ -33,7 +38,7 @@ def play():
         elapsed = time.ticks_diff(now, start) / 1000
         if elapsed >= TOTAL_SECONDS:
             return "BOOM"
-        if button.value() == 0:
+        if pressed():
             if hold_start is None:
                 hold_start = now
             held = time.ticks_diff(now, hold_start) / 1000
@@ -59,7 +64,7 @@ def play():
         time.sleep(0.01)
 
 while True:
-    print("Press BOOT to arm")
+    print("Press BOOT or touch the wires to arm")
     wait_for_press()
     result = play()
     print(result)
