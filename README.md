@@ -10,11 +10,11 @@
 
 # 
 
-# 1\. The LED is blue while the bomb waits. Press the button to arm it.
+# 1\. The LED is blue while the bomb waits. Press the button (or touch the two wires together) to arm it.
 
 # 2\. The countdown starts. The light blinks and the buzzer beeps, and both speed up as time runs out.
 
-# 3\. Hold the button for 10 seconds to defuse. The LED turns green and the buzzer beeps steadily. If you let go, the 10 seconds start over.
+# 3\. Hold the button (or keep the wires touching) for 10 seconds to defuse. The LED turns green and the buzzer beeps steadily. If you let go, the 10 seconds start over.
 
 # 4\. If the timer reaches zero, the bomb "explodes": solid red light and a long tone.
 
@@ -34,9 +34,31 @@
 
 # \- Active buzzer (GPIO 2, minus to GND)
 
-# \- External button (GPIO 3): planned
+# \- External button (GPIO 3 to GND). A push button works, and so do two wires touching.
 
 # \- 4x3 keypad: planned
+
+# 
+
+# \## Wiring
+
+# 
+
+# | Part | ESP32-C6 pin |
+
+# | --- | --- |
+
+# | Buzzer plus | GPIO 2 |
+
+# | Buzzer minus | GND |
+
+# | External button, wire 1 | GPIO 3 |
+
+# | External button, wire 2 | GND |
+
+# 
+
+# Wiring photo: coming soon.
 
 # 
 
@@ -54,11 +76,13 @@
 
 # | beep.py | Buzzer test: 5 short beeps |
 
+# | ext\_button.py | External button test: prints PRESSED and released |
+
 # | countdown.py | LED blinks faster and faster, then explodes |
 
 # | defuse.py | Countdown plus hold-to-defuse |
 
-# | game.py | Complete game with lights and sounds: press to arm, countdown, defuse or explode, then reset |
+# | game.py | Complete game with lights and sounds: press to arm, countdown, defuse or explode, then reset. Works with BOOT or the external button |
 
 # 
 
@@ -96,7 +120,7 @@
 
 # \- \[x] Buzzer beeps
 
-# \- \[ ] External button
+# \- \[x] External button
 
 # \- \[ ] Keypad or display
 
